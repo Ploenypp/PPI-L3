@@ -1,6 +1,4 @@
 Questions
-- criteria for path
-- Jaccard similarity (TCP)
 - Common Neighbors algorithm
 - "proteins of multiple shared partners, i.e. those connected by paths of lenth two..."
     proteins that share multiple partners
@@ -8,14 +6,14 @@ Questions
 - co-complex membership annotations
 - data class? (4, humans)
 - Monte Carlo computation cross-validation
-- Preferential Attachement Principle
+- doesn't look at protein properties?
 
 POI+C
-- relies on length 3 network paths
 - TCP : neighborhood-based similarity
     "hypothesis that protein pairs with similar interaction partners should interact fails for most protein pairs"
     "The larger the Jaccard similarity between two proteins, the lower the chance that tey interact with each other."
 - L3 : "identify candidates that are smiliar to the known partners of a node"
+    "proteins linked by multiple pahts of the length [3] ... are more likely to have a direct link"
 - need for normalization : high-degree nodes --> biased predictions
 - Testing (Monte Carlo comutation cross-validation)
     network -> training PPIs set + test dataset
@@ -23,7 +21,8 @@ POI+C
 - Preferential Attachement principle : link "sticky" proteins, link score = product of degrees
 
 Further research for bio
-- co-expression
+- biological principles governing PPIs
+- co-localization + co-expression profiles
 - structural and gene duplication arguments? (to justify path length 3) 
 - "sticky" proteins
 
