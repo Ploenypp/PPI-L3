@@ -1,6 +1,5 @@
 import math
 import g_func
-import cn
 
 def aa_pair(n_list:list[int],e_list:list[int],a:int,b:int) -> float :
     intersect : set[tuple] = g_func.intersect_neighbors(n_list,e_list,a,b)
