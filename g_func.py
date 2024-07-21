@@ -13,6 +13,19 @@ edges : tuple
 def nodes(n:int) -> list[int] :
     return [i for i in range(n)]
 
+def eq_edge(e1:tuple,e2:tuple) -> bool :
+    a1 : int = e1[0]
+    a2 : int = e1[1]
+    b1 : int = e2[0]
+    b2 : int = e2[0]
+
+    if e1 == e2 :
+        return True
+    elif a1 == b2 and a2 == b1 :
+        return True
+    else :
+        return False
+
 def check_edge(e_list:list[tuple],e:tuple) -> bool :
     # true : add, false : retry/refuse
     a : int = e[0]
@@ -51,6 +64,7 @@ def add_x_edges(n_list:list[int],e_list:list[tuple],x:int) -> list[tuple] :
         x = x - 1
     return e_list
 
+# NOTICE : only considers 1st node in pair, check if considering 2nd affects other code
 def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
     res : list[list[int]] = []
     for n in n_list :
@@ -108,6 +122,10 @@ def graph(n_list:list[int],e_list:list[tuple]) -> None :
     nx.draw(G, with_labels = True, font_weight = 'bold')
     plt.show()
     
-
-
+#generate random
+"""n_list = nodes(10)
+e_list = edges(n_list)
+e_list = add_x_edges(n_list,e_list,5)
+print_info(n_list,e_list)
+graph(n_list,e_list)"""
 
