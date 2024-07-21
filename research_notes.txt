@@ -1,5 +1,12 @@
-in order of broadness to specific 
-CN > RA > AA 
+CN RA AA
+    in order of broadness to specific 
+    CN > RA > AA 
 
-in order of inclusion
-AA < RA < CN
+    in order of inclusion
+    AA < RA < CN
+
+    incorrect predictions most of the time, except sometimes 1 correct prediction (most likely chance?)
+
+>>> ???
+- find precise criteria for link removal
+- find specified structure for network
