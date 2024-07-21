@@ -1,5 +1,0 @@
-in order of broadness to specific 
-CN > RA > AA 
-
-in order of inclusion
-AA < RA < CN
