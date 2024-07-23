@@ -10,8 +10,12 @@ nodes : int
 edges : tuple 
 """
 
+# GRAPH GENERATION
+
 def nodes(n:int) -> list[int] :
     return [i for i in range(n)]
+
+# edges
 
 def eq_edge(e1:tuple,e2:tuple) -> bool :
     a1 : int = e1[0]
@@ -63,6 +67,17 @@ def add_x_edges(n_list:list[int],e_list:list[tuple],x:int) -> list[tuple] :
         print("\t(",a,",",b,") added")
         x = x - 1
     return e_list
+
+def graph(n_list:list[int],e_list:list[tuple]) -> None :
+    G = nx.Graph()
+    for x in n_list :
+        G.add_node(x)
+    for (a,b) in e_list :
+        G.add_edge(a,b,color = 'b',weight = 4)
+    nx.draw(G, with_labels = True, font_weight = 'bold')
+    plt.show()
+  
+# CALCULATIONS + FUNCTIONS on GRAPHS
 
 def neighbors(n_list:list[int],e_list:list[tuple],x:list) -> list[int] :
     aux : list[int] = []
@@ -124,15 +139,51 @@ def exclu_edges(e1:list[tuple],e2:list[tuple]) -> list[tuple] :
     res = [x for x in e2 if check_edge(e1,x)]
     return check_edge_list(res)
 
-def graph(n_list:list[int],e_list:list[tuple]) -> None :
-    G = nx.Graph()
-    for x in n_list :
-        G.add_node(x)
-    for (a,b) in e_list :
-        G.add_edge(a,b,color = 'b',weight = 4)
-    nx.draw(G, with_labels = True, font_weight = 'bold')
-    plt.show()
+# connectivity
+def DFS(n_list:list[int],e_list:list[tuple],queue:list[int],visited:list[int]) -> list[int] :
+    adjacent : list[int] = []
+    for q in queue : 
+        adjacent = adjacent + (neighbors(n_list,e_list,q))
     
+    #print("queue:",queue)
+    #print("visited:",visited)
+    #print("neighbors:",neighbors)
+    
+    unvisited : list[int] = []
+    for a in adjacent :
+        if a not in visited and a not in queue and a not in unvisited :
+            unvisited.append(a)
+    #print("unvisited:",unvisited,"\n")
+
+    res = visited + queue
+    if unvisited == [] :
+        return res
+    return DFS(n_list,e_list,unvisited,res)
+
+def sub_graphs(n_list:list[int],e_list:list[tuple],x:int) -> list[list[int]] :
+    res : list[list[int]] = []
+    connected = DFS(n_list,e_list,[x],[])
+    res.append(connected)
+    #print("-- connected:", connected)
+    
+    unconnected : list[int] = [n for n in n_list if n not in connected]
+    #print("-- unconnected:", unconnected)
+    if unconnected == [] :
+        return res
+    res = res + (sub_graphs(unconnected,e_list,unconnected[0]))
+    return res
+
+def connect(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
+    sub = sub_graphs(n_list,e_list,n_list[0])
+    if len(sub) == 1 :
+        print("graph already connected")
+        return e_list
+    else :
+        for i in range(1,len(sub)) :
+            e_list.append(tuple((sub[0][0],sub[i][0])))
+            print("\t",tuple((sub[0][0],sub[i][0])),"added")
+        return e_list
+  
 #generate random
 """n_list = nodes(NUMNODE)
 e_list = edges(n_list)
