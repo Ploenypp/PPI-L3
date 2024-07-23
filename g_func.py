@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from typing import Final
 
 NUMNODE : Final[int] = 5
-
+3
 """ > notes 
 nodes : int
 edges : tuple 
