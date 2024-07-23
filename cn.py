@@ -89,16 +89,16 @@ def CN(n:int,x:int) -> None :
 
     print("-- fin --")
 
-def apply_CN(n_list:list[int],e_list:list[tuple]) -> None :
+def apply_CN(n_list:list[int],e_list:list[tuple],choice:function) -> None :
     print("-- original graph --")
     g_func.graph(n_list,e_list)
     
     print("-- CN scores --")
     print_cn_tab(n_list,e_list)
 
-    cn_list : list[tuple] = best_cn_overall(n_list,e_list)
+    cn_list : list[tuple] = choice(n_list,e_list)
     print("proposed edges : ", cn_list)
-    cn_list = g_func.exclu_edges(e_list,best_cn_overall(n_list,e_list))
+    cn_list = g_func.exclu_edges(e_list,choice(n_list,e_list))
     print("new edges : ", cn_list)
     
 
