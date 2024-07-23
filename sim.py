@@ -1,6 +1,5 @@
 import random
 import g_func
-import connectivity
 import test_cn_ra_aa
 
 def rem_x_edges(n_list:list[int],e_list:list[int],x:int) -> list[list[tuple]] :
@@ -11,7 +10,7 @@ def rem_x_edges(n_list:list[int],e_list:list[int],x:int) -> list[list[tuple]] :
     while x > 0 :
         aux_e : tuple = e_list[random.randint(0,len(e_list)-1)]
         aux_l : list[tuple] = [e for e in e_list_given if e != aux_e]
-        if len(connectivity.sub_graphs(n_list,aux_l,n_list[0])) == 1 :
+        if len(g_func.sub_graphs(n_list,aux_l,n_list[0])) == 1 :
             e_list_ex.append(aux_e)
             e_list_given = aux_l
             #print("- remaining : ",e_list_given)
@@ -24,7 +23,7 @@ def rem_x_edges(n_list:list[int],e_list:list[int],x:int) -> list[list[tuple]] :
 #tests
 n_list = g_func.nodes(25)
 e_list = g_func.edges(n_list)
-e_list = connectivity.connect(n_list,e_list)
+e_list = g_func.connect(n_list,e_list)
 e_list = g_func.add_x_edges(n_list,e_list,5)
 g_func.graph(n_list,e_list)
 
@@ -37,7 +36,7 @@ print("given edge list : ", e_list_given)
 print("removed edges : ", e_list_ex)
 
 print("-- check connectivity --")
-e_list_given = connectivity.connect(n_list,e_list_given)
+e_list_given = g_func.connect(n_list,e_list_given)
 
 print("\n-- start evaluation --")
 #g_func.print_info(n_list,e_list)
