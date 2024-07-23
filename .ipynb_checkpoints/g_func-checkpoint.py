@@ -75,7 +75,6 @@ def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
         res.append(aux)
     return res
 
-# NOTICE : display of edges isn't a true adjacency list (no duplicates)
 def print_info(n_list:list[int],e_list:list[tuple]) -> None :
     print("nodes : ", n_list)
     e_aux : list[list[int]] = edge_list_adj(n_list,e_list)

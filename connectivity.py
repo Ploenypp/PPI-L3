@@ -83,3 +83,12 @@ print(sub_graphs(n_list,e_list,5))
 e_list = connect(n_list,e_list)
 print("check")
 print(sub_graphs(n_list,e_list,5))"""
+
+#generate random
+n_list = g_func.nodes(8)
+e_list = g_func.edges(n_list)
+e_list = connect(n_list,e_list)
+e_list = g_func.add_x_edges(n_list,e_list,6)
+g_func.print_info(n_list,e_list)
+g_func.graph(n_list,e_list)
+print(e_list)

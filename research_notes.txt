@@ -1,3 +1,23 @@
+GitHub updates/commits + Terminal commands
+pwd : pathway to current directory
+ls : shows folders + files in current directory
+cd (folder) : changes directory to folder within former directory
+cd (pathway) : changes directory to directory addressed by pathway
+
+git add .
+git status
+    allows to see uncommited changes
+git commit -m 'message'
+git push
+
+    note : used git push -u origin -all instead of git push --set-upstream origin master
+    to create pull request for 'master' : https://github.com/Ploenypp/PPI_L3/pull/new/master
+
+
+>>> ???
+- find precise criteria for link removal
+- find specified structure for network
+
 CN RA AA
     in order of broadness to specific 
     CN > RA > AA 
@@ -7,6 +27,3 @@ CN RA AA
 
     incorrect predictions most of the time, except sometimes 1 correct prediction (most likely chance?)
 
->>> ???
-- find precise criteria for link removal
-- find specified structure for network
