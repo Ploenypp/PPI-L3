@@ -30,6 +30,24 @@ def best_cn(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
             res.append(tuple((i,max)))
     return g_func.check_edge_list(res)
 
+def best_cn_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
+    # proposes edges based on overall best score
+    res : list[tuple] = []
+    max_val : int = 0
+    all_cn : list[list[int]] = cn_all(n_list,e_list)
+
+    # calculate max(CN)
+    for i in range(len(all_cn)) :
+        if max(all_cn[i]) > max_val :
+            max_val = max(all_cn[i])
+    
+    # filter out edges of score max_val
+    for i in range(len(all_cn)) :
+        for j in range(len(all_cn)) :
+            if g_func.check_edge(res,(i,max)) and all_cn[i][j] == max_val :
+                res.append(tuple((i,j)))
+    return g_func.check_edge_list(res)
+
 def print_cn_tab(n_list:list[int],e_list:list[tuple]) -> None :
     tab : list[list[int]] = cn_all(n_list,e_list)
     
@@ -77,10 +95,10 @@ def apply_CN(n_list:list[int],e_list:list[tuple]) -> None :
     
     print("-- CN scores --")
     print_cn_tab(n_list,e_list)
-    
-    cn_list : list[tuple] = best_cn(n_list,e_list)
+
+    cn_list : list[tuple] = best_cn_overall(n_list,e_list)
     print("proposed edges : ", cn_list)
-    cn_list = g_func.exclu_edges(e_list,best_cn(n_list,e_list))
+    cn_list = g_func.exclu_edges(e_list,best_cn_overall(n_list,e_list))
     print("new edges : ", cn_list)
     
 
@@ -90,3 +108,8 @@ def apply_CN(n_list:list[int],e_list:list[tuple]) -> None :
 #test
 #print("-- start --")
 #CN(5,2)
+n1_list = [0,1,2,3,4]
+e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
+print(g_func.neighbors(n1_list,e1_list,4))
+#print(cn_score_pair(n1_list,e1_list,0,4))
+apply_CN(n1_list,e1_list)
