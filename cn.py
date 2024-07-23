@@ -2,6 +2,7 @@ import g_func
 
 # > note : (func) intersect_neighbors = Common Neighbors between pairs
 
+# (!) uses intersect_neighbors
 def cn_indiv(n_list:list[int],e_list:list[tuple],x:int) -> list[int] :
     # gives CN score for 1 node pair
     res : list[int] = [] 
