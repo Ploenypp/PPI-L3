@@ -1,6 +1,7 @@
 import g_func
 
 # (!) uses intersect_neighbors
+# (!) uses degree
 def ra_pair(n_list:list[int],e_list:list[int],a:int,b:int) -> float :
     intersect : set[tuple] = g_func.intersect_neighbors(n_list,e_list,a,b)
     sum : float = 0.0
