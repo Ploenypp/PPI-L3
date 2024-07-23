@@ -2,24 +2,10 @@ import g_func
 
 #g_func.neighbors() -> list of neighbors of node x
 
-def re_neighbors(n_list:list[int],e_list:list[tuple],x:int) -> list[int] :
-    aux : list[int] = []
-    for (a,b) in e_list :
-        if a == x :
-            aux.append(b)
-        elif b == x :
-            aux.append(a)
-
-    res : list[int] = []
-    for i in aux :
-        if i not in res :
-            res.append(i)
-    return res
-
 def DFS(n_list:list[int],e_list:list[tuple],queue:list[int],visited:list[int]) -> list[int] :
     neighbors : list[int] = []
     for q in queue : 
-        neighbors = neighbors + (re_neighbors(n_list,e_list,q))
+        neighbors = neighbors + (g_func.neighbors(n_list,e_list,q))
     
     #print("queue:",queue)
     #print("visited:",visited)

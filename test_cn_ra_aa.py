@@ -3,7 +3,6 @@ import cn
 import ra
 import aa
 import compare_cn_ra_aa
-import connectivity
 
 def check_edge_in_list(e:tuple,e_list:list[tuple]) -> bool :
     if e == tuple() :
