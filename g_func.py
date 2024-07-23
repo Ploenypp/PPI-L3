@@ -64,14 +64,25 @@ def add_x_edges(n_list:list[int],e_list:list[tuple],x:int) -> list[tuple] :
         x = x - 1
     return e_list
 
+def neighbors(n_list:list[int],e_list:list[tuple],x:list) -> list[int] :
+    aux : list[int] = []
+    for (a,b) in e_list :
+        if a == x :
+            aux.append(b)
+        elif b == x :
+            aux.append(a)
+
+    res : list[int] = []
+    for i in aux :
+        if i not in res :
+            res.append(i)
+    return res
+
 # NOTICE : only considers 1st node in pair, check if considering 2nd affects other code
 def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
     res : list[list[int]] = []
     for n in n_list :
-        aux : list[int] = []
-        for (a,b) in e_list : 
-            if a == n :
-                aux.append(b)
+        aux : list[int] = neighbors(n_list,e_list,n)
         res.append(aux)
     return res
 
@@ -88,11 +99,6 @@ def print_info(n_list:list[int],e_list:list[tuple]) -> None :
             print(n," ",end="")
         print("\n")
         i = i + 1
-
-# (!) uses edge_list_adj
-def neighbors(n_list:list[int],e_list:list[tuple],x:int) -> list[int] :
-    aux : list[list[int]] = edge_list_adj(n_list,e_list)
-    return aux[x]
 
 # (!) uses neighbors
 def degree(n_list:list[int],e_list:list[tuple],x:int) -> int :
@@ -128,9 +134,9 @@ def graph(n_list:list[int],e_list:list[tuple]) -> None :
     plt.show()
     
 #generate random
-"""n_list = nodes(10)
+"""n_list = nodes(NUMNODE)
 e_list = edges(n_list)
-e_list = add_x_edges(n_list,e_list,5)
+e_list = add_x_edges(n_list,e_list,2)
 print_info(n_list,e_list)
 graph(n_list,e_list)"""
 
