@@ -123,6 +123,7 @@ def degree(n_list:list[int],e_list:list[tuple],x:int) -> int :
 def intersect_neighbors(n_list:list[int],e_list:list[tuple],a:int,b:int) -> list[int] :
     a_n : list[int] = neighbors(n_list,e_list,a)
     b_n : list[int] = neighbors(n_list,e_list,b)
+
     if len(a_n) > len(b_n) :
         return [x for x in a_n if x in b_n]
     else :
