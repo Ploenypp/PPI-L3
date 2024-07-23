@@ -76,6 +76,7 @@ def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
     return res
 
 # NOTICE : display of edges isn't a true adjacency list (no duplicates)
+# (!) uses edge_list_adj
 def print_info(n_list:list[int],e_list:list[tuple]) -> None :
     print("nodes : ", n_list)
     e_aux : list[list[int]] = edge_list_adj(n_list,e_list)
@@ -88,13 +89,16 @@ def print_info(n_list:list[int],e_list:list[tuple]) -> None :
         print("\n")
         i = i + 1
 
+# (!) uses edge_list_adj
 def neighbors(n_list:list[int],e_list:list[tuple],x:int) -> list[int] :
     aux : list[list[int]] = edge_list_adj(n_list,e_list)
     return aux[x]
 
+# (!) uses neighbors
 def degree(n_list:list[int],e_list:list[tuple],x:int) -> int :
     return len(neighbors(n_list,e_list,x))
 
+# (!) uses neighbors
 def intersect_neighbors(n_list:list[int],e_list:list[tuple],a:int,b:int) -> list[int] :
     a_n : list[int] = neighbors(n_list,e_list,a)
     b_n : list[int] = neighbors(n_list,e_list,b)
