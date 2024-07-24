@@ -67,29 +67,6 @@ def print_cn_tab(n_list:list[int],e_list:list[tuple]) -> None :
             print(tab[i][j]," ",end="")
         print("\n")
 
-def CN(n:int,x:int) -> None :
-    n_list : list[int] = g_func.nodes(n)
-    e_list : list[tuple] = g_func.edges(n_list)
-    e_list = g_func.add_x_edges(n_list,e_list,x)
-    g_func.print_info(n_list,e_list)
-    g_func.graph(n_list,e_list)
-
-    print("-- apply Common Neighors --\n CN scores \n")
-    print_cn_tab(n_list,e_list)
-    #print("simplified CN table\n")
-    #print_cn_tab_modif(n_list,e_list)
-
-    cn_list : list[tuple] = best_cn(n_list,e_list)
-    print("proposed edges : ", cn_list)
-    a_list : list[tuple] = g_func.exclu_edges(e_list,cn_list)
-    print("new edges : ", a_list)
-
-    e_list = e_list + a_list
-    g_func.print_info(n_list,e_list)
-    g_func.graph(n_list,e_list)
-
-    print("-- fin --")
-
 def apply_CN(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
     # returns new edge list (including new edges)
 
@@ -119,7 +96,6 @@ def compare_methods_CN(n_list:list[int],e_list:list[tuple]) -> None :
 
 #test
 #print("-- start --")
-#CN(5,2)
 #n1_list = [0,1,2,3,4]
 #e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
 #print(g_func.neighbors(n1_list,e1_list,4))
