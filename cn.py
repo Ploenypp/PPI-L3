@@ -17,6 +17,7 @@ def cn_all(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
 
 def best_cn_node(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
     # proposes best edges for each node a (given edge (a,b))
+    # (!) DON'T USE, code remains for sake of comparison
     res : list[tuple] = []
     max : int = 0
     all_cn : list[list[int]] = cn_all(n_list,e_list)
