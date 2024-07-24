@@ -89,30 +89,41 @@ def CN(n:int,x:int) -> None :
 
     print("-- fin --")
 
-def apply_CN(n_list:list[int],e_list:list[tuple],method) -> None :
+def apply_CN(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
+    # returns new edge list (including new edges)
+
+    cn_list : list[tuple] = method(n_list,e_list)
+    print("\t - proposed edges : ", cn_list)
+    cn_list = g_func.exclu_edges(e_list,method(n_list,e_list))
+    print("\t - new edges : ", cn_list)
+
+    return e_list + cn_list
+
+def compare_methods_CN(n_list:list[int],e_list:list[tuple]) -> None :
     print("-- original graph --")
     g_func.graph(n_list,e_list)
-    
+
     print("-- CN scores --")
     print_cn_tab(n_list,e_list)
 
-    cn_list : list[tuple] = method(n_list,e_list)
-    print("proposed edges : ", cn_list)
-    cn_list = g_func.exclu_edges(e_list,method(n_list,e_list))
-    print("new edges : ", cn_list)
-    
+    print("best_cn_overall")
+    bco : list[tuple] = apply_CN(n_list,e_list,best_cn_overall)
+    print("best_cn_node")
+    bcn : list[tuple] = apply_CN(n_list,e_list,best_cn_node)
 
-    e_list = e_list + cn_list
-    print("-- new graph --")
-    g_func.graph(n_list,e_list)
+    print("best_cn_overall")
+    g_func.graph(n_list,bco)
+    print("best_cn_node")
+    g_func.graph(n_list,bcn)
+
 #test
 #print("-- start --")
 #CN(5,2)
-n1_list = [0,1,2,3,4]
-e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
-print(g_func.neighbors(n1_list,e1_list,4))
+#n1_list = [0,1,2,3,4]
+#e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
+#print(g_func.neighbors(n1_list,e1_list,4))
 #print(cn_score_pair(n1_list,e1_list,0,4))
-print("-- using best_cn_overall --")
-apply_CN(n1_list,e1_list,best_cn_overall)
-print("-- using best_en_node --")
-apply_CN(n1_list,e1_list,best_cn_node)
+#print("-- using best_cn_overall --")
+#apply_CN(n1_list,e1_list,best_cn_overall)
+#print("-- using best_en_node --")
+#apply_CN(n1_list,e1_list,best_cn_node)
