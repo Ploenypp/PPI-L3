@@ -13,6 +13,12 @@ git push
     note : used git push -u origin -all instead of git push --set-upstream origin master
     to create pull request for 'master' : https://github.com/Ploenypp/PPI_L3/pull/new/master
 
+CN
+- choose overall highest CN score (bco) instead of best edge for each node (bcn)
+    - in theory, bcn favors the creation of edges from the node of the lowest value (condition not explicity written/implemented)
+    - result : creation high-degree nodes that could impact future predictions based on previous prediction
+
+EVALUATION (DON'T DO UNTIL THAT EACH METHOD'S CODE WORKS)
 
 >>> ???
 - find precise criteria for link removal
