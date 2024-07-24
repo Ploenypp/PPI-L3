@@ -15,7 +15,7 @@ def cn_all(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
     # gives CN scores for all node pairs
     return [cn_indiv(n_list,e_list,n) for n in n_list]
 
-def best_cn(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
+def best_cn_node(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
     # proposes best edges for each node a (given edge (a,b))
     res : list[tuple] = []
     max : int = 0
@@ -89,16 +89,16 @@ def CN(n:int,x:int) -> None :
 
     print("-- fin --")
 
-def apply_CN(n_list:list[int],e_list:list[tuple],choice:function) -> None :
+def apply_CN(n_list:list[int],e_list:list[tuple],method) -> None :
     print("-- original graph --")
     g_func.graph(n_list,e_list)
     
     print("-- CN scores --")
     print_cn_tab(n_list,e_list)
 
-    cn_list : list[tuple] = choice(n_list,e_list)
+    cn_list : list[tuple] = method(n_list,e_list)
     print("proposed edges : ", cn_list)
-    cn_list = g_func.exclu_edges(e_list,choice(n_list,e_list))
+    cn_list = g_func.exclu_edges(e_list,method(n_list,e_list))
     print("new edges : ", cn_list)
     
 
@@ -112,4 +112,7 @@ n1_list = [0,1,2,3,4]
 e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
 print(g_func.neighbors(n1_list,e1_list,4))
 #print(cn_score_pair(n1_list,e1_list,0,4))
-apply_CN(n1_list,e1_list)
+print("-- using best_cn_overall --")
+apply_CN(n1_list,e1_list,best_cn_overall)
+print("-- using best_en_node --")
+apply_CN(n1_list,e1_list,best_cn_node)
