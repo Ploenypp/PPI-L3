@@ -29,7 +29,8 @@ def ra_all(n_list:list[int],e_list:list[int]) -> list[list[float]] :
         res.append(aux)
     return res
 
-def best_ra(n_list:list[int],e_list:list[int]) -> list[tuple] :
+def best_ra_node(n_list:list[int],e_list:list[int]) -> list[tuple] :
+    # proposes best edges for each node a (given edge(a,b))
     res : list[tuple] = []
     max : int = -1
     ra : list[list[float]] = ra_all(n_list,e_list)
@@ -40,6 +41,24 @@ def best_ra(n_list:list[int],e_list:list[int]) -> list[tuple] :
             if ra[i][j] > ra[i][max] :
                 max = j
         res.append(tuple((i,max)))
+    return g_func.check_edge_list(res)
+
+def best_ra_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
+    # proposes edges based on overall best score
+    res : list[tuple] = []
+    max_val : float = 0
+    all_ra : list[list[float]] = ra_all(n_list,e_list)
+
+    # calculate max(RA)
+    for i in range(len(all_ra)) :
+        if max(all_ra[i]) > max_val :
+            max_val = max(all_ra[i])
+
+    # filter out edges for score max_val 
+    for i in range(len(all_ra)) :
+        for j in range(len(all_ra)) :
+            if g_func.check_edge(res,(i,max)) and all_cn[i][j] == max_val :
+                res.append(tuple((i,j)))
     return g_func.check_edge_list(res)
 
 def print_ra_tab(n_list:list[int],e_list:list[tuple]) -> None :
@@ -108,6 +127,17 @@ def RA(n:int,x:int) -> None :
     g_func.graph(n_list,e_list)
 
     print("-- fin --")
+
+def apply_RA(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
+    # returns new edge list (including new edges)
+
+    ra_list : list[tuple] = method(n_list,e_list)
+    print("\t - proposed edges : ", ra_list)
+    ra_list = g_func.exclu_edges(e_list,method(n_list,e_list))
+    print("\t - new edges : ", ra_list)
+
+    return e_list + ra_list
+
 
 #test
 #print("-- start --")
