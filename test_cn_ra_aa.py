@@ -4,6 +4,14 @@ import ra
 import aa
 import compare_cn_ra_aa
 
+""" first made as an attempt to test if CN/RA/AA can predict removed edges 
+    INCORRECT PREMISE 
+        randomly generated graphs + randomly removed edges --> (assumption) no meaning to removal, therefore no meaning to prediction
+
+    NOT MEANT FOR IMPLEMENTATION
+    NOT OPTIMIZED (may contain redundant code)
+"""
+
 def check_edge_in_list(e:tuple,e_list:list[tuple]) -> bool :
     if e == tuple() :
         return False
