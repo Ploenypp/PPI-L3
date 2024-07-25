@@ -34,19 +34,18 @@ def scores_indiv(n_list:list[int],e_list:list[tuple],x:int,method) -> list[float
 def scores_all(n_list:list[int],e_list:list[tuple],method) -> list[list[float]] :
     return [scores_indiv(n_list,e_list,n,method) for n in n_list]
 
-def print_scores(n_list:list[int],e_list:list[tuple],method) -> None :
-    tab : list[list[float]] = scores_all(n_list,e_list,method)
+def print_scores(tab:list[list[float]]) -> None :
 
     print("     ",end="")
-    for i in range(len(n_list)) :
+    for i in range(len(tab)) :
         print(i,"   ",end="")
     print("\n")
     print("    ",end="")
-    for i in range(len(n_list)+2) :
+    for i in range(len(tab)+2) :
         print("- - ",end="")
     print("\n")
 
-    for i in range(len(n_list)) :
+    for i in range(len(tab)) :
         print(i,"| ",end="")
         for j in range(len(tab[i])) :
             if tab[i][j] == 0 :
