@@ -138,7 +138,22 @@ def apply_RA(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
 
     return e_list + ra_list
 
+def compare_methods_RA(n_list:list[int],e_list:list[tuple]) -> None :
+    print("-- original graph --")
+    g_func.graph(n_list,e_list)
 
+    print("-- RA scores --")
+    print_ra_tab(n_list,e_list)
+
+    print("best_ra_overall")
+    bco : list[tuple] = apply_RA(n_list,e_list,best_ra_overall)
+    print("best_ra_node")
+    bcn : list[tuple] = apply_RA(n_list,e_list,best_ra_node)
+
+    print("best_ra_overall")
+    g_func.graph(n_list,bco)
+    print("best_ra_node")
+    g_func.graph(n_list,bcn)
 #test
 #print("-- start --")
 #RA(10,2)
