@@ -1,6 +1,6 @@
 import random
 import g_func
-import test_cn_ra_aa
+import drafting.test_cn_ra_aa as test_cn_ra_aa
 
 """ first made as an attempt to test if CN/RA/AA can predict removed edges 
     INCORRECT PREMISE 

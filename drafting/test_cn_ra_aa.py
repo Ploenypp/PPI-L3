@@ -2,7 +2,7 @@ import g_func
 import cn
 import ra
 import aa
-import compare_cn_ra_aa
+import drafting.compare_cn_ra_aa as compare_cn_ra_aa
 
 """ first made as an attempt to test if CN/RA/AA can predict removed edges 
     INCORRECT PREMISE 
