@@ -105,29 +105,6 @@ def print_ra_tab_modif(n_list:list[int],e_list:list[tuple]) -> None :
                 print("%.2f|"% tab[i][j],end="")
         print("\n")
 
-def RA(n:int,x:int) -> None :
-    n_list : list[int] = g_func.nodes(n)
-    e_list : list[tuple] = g_func.edges(n_list)
-    e_list = g_func.add_x_edges(n_list,e_list,x)
-    g_func.print_info(n_list,e_list)
-    g_func.graph(n_list,e_list)
-
-    print("-- apply Resource Allocation --\n RA scores \n")
-    #print_ra_tab(n_list,e_list)
-    #print("simplified RA table\n")
-    print_ra_tab_modif(n_list,e_list)
-    
-    ra_list : list[tuple] = best_ra(n_list,e_list)
-    print("proposed edges : ", ra_list)
-    a_list : list[tuple] = g_func.exclu_edges(e_list,ra_list)
-    print("new edges : ", a_list)
-
-    e_list = e_list + a_list
-    g_func.print_info(n_list,e_list)
-    g_func.graph(n_list,e_list)
-
-    print("-- fin --")
-
 def apply_RA(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
     # returns new edge list (including new edges)
 
@@ -154,6 +131,3 @@ def compare_methods_RA(n_list:list[int],e_list:list[tuple]) -> None :
     g_func.graph(n_list,bco)
     print("best_ra_node")
     g_func.graph(n_list,bcn)
-#test
-#print("-- start --")
-#RA(10,2)
