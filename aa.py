@@ -105,29 +105,6 @@ def print_aa_tab_modif(n_list:list[int],e_list:list[tuple]) -> None :
                 print("%.2f|"% tab[i][j],end="")
         print("\n")
 
-def AA(n:int,x:int) -> None :
-    n_list : list[int] = g_func.nodes(n)
-    e_list : list[tuple] = g_func.edges(n_list)
-    e_list = g_func.add_x_edges(n_list,e_list,x)
-    g_func.print_info(n_list,e_list)
-    g_func.graph(n_list,e_list)
-
-    print("-- apply Adamic-Adar --\n AA scores \n")
-    #print_aa_tab(n_list,e_list)
-    #print("simplified AA table\n")
-    print_aa_tab_modif(n_list,e_list)
-
-    aa_list : list[tuple] = best_aa(n_list,e_list)
-    print("proposed edges :", aa_list)
-    a_list : list[tuple] = g_func.exclu_edges(e_list,aa_list)
-    print("new edges : ", a_list)
-
-    e_list = e_list + a_list
-    g_func.print_info(n_list,e_list)
-    g_func.graph(n_list,e_list)
-
-    print("-- fin --")
-
 def apply_AA(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
     # returns new edge list (including new edges)
 
@@ -154,7 +131,3 @@ def compare_methods_AA(n_list:list[int],e_list:list[tuple]) -> None :
     g_func.graph(n_list,bco)
     print("best_ra_node")
     g_func.graph(n_list,bcn)
-
-#test
-#print("-- start --")
-#AA(10,2)
