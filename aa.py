@@ -43,7 +43,7 @@ def best_aa_node(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
         res.append(tuple((i,max)))
     return g_func.check_edge_list(res)
 
-def best_ra_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
+def best_aa_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
     # proposes edges based on overall best score
     res : list[tuple] = []
     max_val : float = 0
