@@ -3,22 +3,27 @@ import cn
 import ra
 import aa
 
+""" first made to better visualize the differences between CN/RA/AA
+    NOT MEANT FOR IMPLEMENTATION
+    NOT OPTIMIZED (may contain redundant code)
+"""
+
 def compare_tab(n_list:list[int],e_list:list[tuple]) -> None :
     print("-- CN scores --\n")
-    cn.print_cn_tab_modif(n_list,e_list)
+    cn.print_cn_tab(n_list,e_list)
     print("-- RA scores --\n")
-    ra.print_ra_tab_modif(n_list,e_list)
+    ra.print_ra_tab(n_list,e_list)
     print("-- AA scores --\n")
-    aa.print_aa_tab_modif(n_list,e_list)
+    aa.print_aa_tab(n_list,e_list)
 
 def intersect_edges(e1:list[tuple],e2:list[tuple]) -> list[tuple] :
     res = [x for x in e1 for y in e2 if g_func.eq_edge(x,y)]
     return g_func.check_edge_list(res)
 
 def compare_edges(n_list:list[int],e_list:list[tuple]) -> None :
-    cn_list = cn.best_cn(n_list,e_list)
-    ra_list = ra.best_ra(n_list,e_list)
-    aa_list = aa.best_aa(n_list,e_list)
+    cn_list = cn.best_cn_overall(n_list,e_list)
+    ra_list = ra.best_ra_overall(n_list,e_list)
+    aa_list = aa.best_aa_overall(n_list,e_list)
 
     print("-- proposed edges -- ")
     print("CN (", len(cn_list), ") : ", cn_list)
