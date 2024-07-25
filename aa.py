@@ -3,7 +3,7 @@ import g_func
 
 # (!) uses intersect_neighbors
 # (!) uses degree
-def aa_pair(n_list:list[int],e_list:list[int],a:int,b:int) -> float :
+def aa_pair(n_list:list[int],e_list:list[tuple],a:int,b:int) -> float :
     intersect : set[tuple] = g_func.intersect_neighbors(n_list,e_list,a,b)
     sum : float = 0.0
     for x in intersect :
@@ -12,7 +12,7 @@ def aa_pair(n_list:list[int],e_list:list[int],a:int,b:int) -> float :
             sum = sum + 1/(math.log10(aux))
     return sum
 
-def aa_indiv(n_list:list[int],e_list:list[int],x:int) -> list[float] :
+def aa_indiv(n_list:list[int],e_list:list[tuple],x:int) -> list[float] :
     res : list[float] = []
 
     for n in n_list :
@@ -22,7 +22,7 @@ def aa_indiv(n_list:list[int],e_list:list[int],x:int) -> list[float] :
             res.append(0.00)
     return res
 
-def aa_all(n_list:list[int],e_list:list[int]) -> list[list[float]] :
+def aa_all(n_list:list[int],e_list:list[tuple]) -> list[list[float]] :
     res : list[list[float]] = []
 
     for n in n_list :
@@ -30,7 +30,7 @@ def aa_all(n_list:list[int],e_list:list[int]) -> list[list[float]] :
         res.append(aux)
     return res
 
-def best_aa(n_list:list[int],e_list:list[int]) -> list[tuple] :
+def best_aa_node(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
     res : list[tuple] = []
     max : int = -1
     aa : list[list[float]] = aa_all(n_list,e_list)
@@ -41,6 +41,24 @@ def best_aa(n_list:list[int],e_list:list[int]) -> list[tuple] :
             if aa[i][j] > aa[i][max] :
                 max = j
         res.append(tuple((i,max)))
+    return g_func.check_edge_list(res)
+
+def best_ra_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
+    # proposes edges based on overall best score
+    res : list[tuple] = []
+    max_val : float = 0
+    all_aa : list[list[float]] = aa_all(n_list,e_list)
+
+    # calculate max(AA)
+    for i in range(len(all_aa)) :
+        if max(all_aa[i]) > max_val :
+            max_val = max(all_aa[i])
+
+    # filter out edges for score max_val 
+    for i in range(len(all_aa)) :
+        for j in range(len(all_aa)) :
+            if g_func.check_edge(res,(i,max)) and all_aa[i][j] == max_val :
+                res.append(tuple((i,j)))
     return g_func.check_edge_list(res)
 
 def print_aa_tab(n_list:list[int],e_list:list[tuple]) -> None :
@@ -110,6 +128,33 @@ def AA(n:int,x:int) -> None :
 
     print("-- fin --")
 
+def apply_AA(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
+    # returns new edge list (including new edges)
+
+    aa_list : list[tuple] = method(n_list,e_list)
+    print("\t - proposed edges : ", aa_list)
+    aa_list = g_func.exclu_edges(e_list,method(n_list,e_list))
+    print("\t - new edges : ", aa_list)
+
+    return e_list + aa_list
+
+def compare_methods_AA(n_list:list[int],e_list:list[tuple]) -> None :
+    print("-- original graph --")
+    g_func.graph(n_list,e_list)
+
+    print("-- RA scores --")
+    print_aa_tab(n_list,e_list)
+
+    print("best_ra_overall")
+    bco : list[tuple] = apply_AA(n_list,e_list,best_aa_overall)
+    print("best_ra_node")
+    bcn : list[tuple] = apply_AA(n_list,e_list,best_aa_node)
+
+    print("best_ra_overall")
+    g_func.graph(n_list,bco)
+    print("best_ra_node")
+    g_func.graph(n_list,bcn)
+
 #test
-print("-- start --")
-AA(10,2)
+#print("-- start --")
+#AA(10,2)
