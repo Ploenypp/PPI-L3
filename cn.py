@@ -42,7 +42,7 @@ def best_cn_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
         if max(all_cn[i]) > max_val :
             max_val = max(all_cn[i])
     
-    # filter out edges of score max_val
+    # filter out edges for score max_val
     for i in range(len(all_cn)) :
         for j in range(len(all_cn)) :
             if g_func.check_edge(res,(i,max)) and all_cn[i][j] == max_val :
