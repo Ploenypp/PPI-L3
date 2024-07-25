@@ -2,7 +2,7 @@ import g_func
 
 # (!) uses intersect_neighbors
 # (!) uses degree
-def ra_pair(n_list:list[int],e_list:list[int],a:int,b:int) -> float :
+def ra_pair(n_list:list[int],e_list:list[tuple],a:int,b:int) -> float :
     intersect : set[tuple] = g_func.intersect_neighbors(n_list,e_list,a,b)
     sum : float = 0.0
     for x in intersect :
@@ -11,7 +11,7 @@ def ra_pair(n_list:list[int],e_list:list[int],a:int,b:int) -> float :
             sum = sum + 1/aux
     return sum
 
-def ra_indiv(n_list:list[int],e_list:list[int],x:int) -> list[float] :
+def ra_indiv(n_list:list[int],e_list:list[tuple],x:int) -> list[float] :
     res : list[float] = []
 
     for n in n_list :
@@ -21,7 +21,7 @@ def ra_indiv(n_list:list[int],e_list:list[int],x:int) -> list[float] :
             res.append(0.00)
     return res
 
-def ra_all(n_list:list[int],e_list:list[int]) -> list[list[float]] :
+def ra_all(n_list:list[int],e_list:list[tuple]) -> list[list[float]] :
     res : list[list[float]] = []
 
     for n in n_list :
@@ -29,7 +29,7 @@ def ra_all(n_list:list[int],e_list:list[int]) -> list[list[float]] :
         res.append(aux)
     return res
 
-def best_ra_node(n_list:list[int],e_list:list[int]) -> list[tuple] :
+def best_ra_node(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
     # proposes best edges for each node a (given edge(a,b))
     res : list[tuple] = []
     max : int = -1
