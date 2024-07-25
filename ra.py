@@ -82,29 +82,6 @@ def print_ra_tab(n_list:list[int],e_list:list[tuple]) -> None :
                 print("%.2f|"% tab[i][j],end="")
         print("\n")
 
-def print_ra_tab_modif(n_list:list[int],e_list:list[tuple]) -> None :
-    tab : list[list[float]] = ra_all(n_list,e_list)
-
-    print("     ",end="")
-    for i in range(len(n_list)) :
-        print(i,"   ",end="")
-    print("\n")
-    print("    ",end="")
-    for i in range(len(n_list)+2) :
-        print("- - ",end="")
-    print("\n")
-
-    for i in range(len(n_list)) :
-        print(i,"| ",end="")
-        for j in range(i) :
-            print("     ",end="")
-        for j in range(i, len(tab[i])) :
-            if tab[i][j] == 0 :
-                print("    |",end="")
-            else :
-                print("%.2f|"% tab[i][j],end="")
-        print("\n")
-
 def apply_RA(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
     # returns new edge list (including new edges)
 
