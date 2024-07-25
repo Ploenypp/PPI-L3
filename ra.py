@@ -57,7 +57,7 @@ def best_ra_overall(n_list:list[int],e_list:list[tuple]) -> list[tuple] :
     # filter out edges for score max_val 
     for i in range(len(all_ra)) :
         for j in range(len(all_ra)) :
-            if g_func.check_edge(res,(i,max)) and all_cn[i][j] == max_val :
+            if g_func.check_edge(res,(i,max)) and all_ra[i][j] == max_val :
                 res.append(tuple((i,j)))
     return g_func.check_edge_list(res)
 
