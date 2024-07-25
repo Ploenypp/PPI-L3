@@ -9,6 +9,7 @@ import compare_cn_ra_aa
         randomly generated graphs + randomly removed edges --> (assumption) no meaning to removal, therefore no meaning to prediction
 
     NOT MEANT FOR IMPLEMENTATION
+    NOT UPDATED (calls to functions that no longer exist)
     NOT OPTIMIZED (may contain redundant code)
 """
 

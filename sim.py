@@ -2,6 +2,15 @@ import random
 import g_func
 import test_cn_ra_aa
 
+""" first made as an attempt to test if CN/RA/AA can predict removed edges 
+    INCORRECT PREMISE 
+        randomly generated graphs + randomly removed edges --> (assumption) no meaning to removal, therefore no meaning to prediction
+
+    NOT MEANT FOR IMPLEMENTATION
+    NOT UPDATED (calls to functions that no longer exist)
+    NOT OPTIMIZED (may contain redundant code)
+"""
+
 def rem_x_edges(n_list:list[int],e_list:list[int],x:int) -> list[list[tuple]] :
     e_list_given : list[tuple] = e_list
     e_list_ex : list[tuple] = []
