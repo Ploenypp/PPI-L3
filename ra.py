@@ -123,11 +123,11 @@ def compare_methods_RA(n_list:list[int],e_list:list[tuple]) -> None :
     print_ra_tab(n_list,e_list)
 
     print("best_ra_overall")
-    bco : list[tuple] = apply_RA(n_list,e_list,best_ra_overall)
+    bro : list[tuple] = apply_RA(n_list,e_list,best_ra_overall)
     print("best_ra_node")
-    bcn : list[tuple] = apply_RA(n_list,e_list,best_ra_node)
+    brn : list[tuple] = apply_RA(n_list,e_list,best_ra_node)
 
     print("best_ra_overall")
-    g_func.graph(n_list,bco)
+    g_func.graph(n_list,bro)
     print("best_ra_node")
-    g_func.graph(n_list,bcn)
+    g_func.graph(n_list,brn)
