@@ -25,7 +25,7 @@ def AA(n_list:list[int],e_list:list[tuple],a:int,b:int) -> float :
         for x in intersect :
             aux = g_func.degree(n_list,e_list,x)
             if aux > 1 :
-                sum = sum + 1/(math.log10(aux))
+                sum = sum + 1/(math.log(aux))
     return sum
 
 def scores_indiv(n_list:list[int],e_list:list[tuple],x:int,method) -> list[float] :
