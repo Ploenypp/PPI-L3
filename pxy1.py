@@ -1,11 +1,6 @@
 import g_func
 import cn_ra_aa
 
-def intersect_nodes(n1_list:list[int],n2_list:list[int]) -> list[int] :
-    if len(n1_list) > len(n2_list) :
-        return [n for n in n1_list if n in n2_list]
-    return [n for n in n2_list if n in n1_list]
-
 def NN(e_list:list[tuple],x:int) -> list[int] :
     first = g_func.neighbors(e_list,x)
     second : list[int] = []
@@ -20,8 +15,8 @@ def NN(e_list:list[tuple],x:int) -> list[int] :
     return res
 
 def p1(e_list:list[tuple],a:int,b:int) -> int :
-    U = intersect_nodes(g_func.neighbors(e_list,a),NN(e_list,b))
-    V = intersect_nodes(g_func.neighbors(e_list,b),NN(e_list,a))
+    U = set(g_func.neighbors(e_list,a)).intersection(set(NN(e_list,b)))
+    V = set(g_func.neighbors(e_list,b)).intersection(set(NN(e_list,a)))
     score : int = 0
 
     for u in U :
