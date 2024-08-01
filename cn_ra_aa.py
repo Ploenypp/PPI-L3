@@ -1,35 +1,35 @@
 import math
 import g_func
 
-def CN(n_list:list[int],e_list:list[tuple],a:int,b:int) -> int :
+def CN(e_list:list[tuple],a:int,b:int) -> int :
     if a == b :
         return 0
-    return len(g_func.intersect_neighbors(n_list,e_list,a,b))
+    return len(g_func.intersect_neighbors(e_list,a,b))
 
-def RA(n_list:list[int],e_list:list[tuple],a:int,b:int) -> float :
-    intersect : set[tuple] = g_func.intersect_neighbors(n_list,e_list,a,b)
+def RA(e_list:list[tuple],a:int,b:int) -> float :
+    intersect : set[tuple] = g_func.intersect_neighbors(e_list,a,b)
     sum : float = 0.0
     
     if a != b :
         for x in intersect :
-            aux = g_func.degree(n_list,e_list,x)
+            aux = g_func.degree(e_list,x)
             if aux > 0 :
                 sum = sum + 1/aux
     return sum
 
-def AA(n_list:list[int],e_list:list[tuple],a:int,b:int) -> float :
-    intersect : set[tuple] = g_func.intersect_neighbors(n_list,e_list,a,b)
+def AA(e_list:list[tuple],a:int,b:int) -> float :
+    intersect : set[tuple] = g_func.intersect_neighbors(e_list,a,b)
     sum : float = 0.0
     
     if a != b :
         for x in intersect :
-            aux = g_func.degree(n_list,e_list,x)
+            aux = g_func.degree(e_list,x)
             if aux > 1 :
                 sum = sum + 1/(math.log(aux))
     return sum
 
 def scores_indiv(n_list:list[int],e_list:list[tuple],x:int,method) -> list[float] :
-    return [method(n_list,e_list,x,n) for n in n_list]
+    return [method(e_list,x,n) for n in n_list]
 
 def scores_all(n_list:list[int],e_list:list[tuple],method) -> list[list[float]] :
     return [scores_indiv(n_list,e_list,n,method) for n in n_list]
