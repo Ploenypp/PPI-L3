@@ -13,6 +13,12 @@ git push
     note : used git push -u origin -all instead of git push --set-upstream origin master
     to create pull request for 'master' : https://github.com/Ploenypp/PPI_L3/pull/new/master
 
+>>> !!!
+- criteria for edge selection
+    (?) non-adjacent node condition
+    - didn't explicitly include for CN/RA/AA (+ pxy1)
+    - BUT did have function filtering out already existing edges (therefore, the ones that remain aren't adjacent because otherwise they would be connected and the edge would already exist)
+
 method for choosing best edge candidates
 - choose overall highest CN score (bco) instead of best edge for each node (bcn)
     - in theory, bcn favors the creation of edges from the node of the lowest value (condition not explicity written/implemented)
