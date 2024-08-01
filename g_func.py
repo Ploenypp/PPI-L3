@@ -79,7 +79,7 @@ def graph(n_list:list[int],e_list:list[tuple]) -> None :
   
 # CALCULATIONS + FUNCTIONS on GRAPHS
 
-def neighbors(n_list:list[int],e_list:list[tuple],x:list) -> list[int] :
+def neighbors(e_list:list[tuple],x:list) -> list[int] :
     aux : list[int] = []
     for (a,b) in e_list :
         if a == x :
@@ -97,7 +97,7 @@ def neighbors(n_list:list[int],e_list:list[tuple],x:list) -> list[int] :
 def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
     res : list[list[int]] = []
     for n in n_list :
-        aux : list[int] = neighbors(n_list,e_list,n)
+        aux : list[int] = neighbors(e_list,n)
         res.append(aux)
     return res
 
@@ -116,13 +116,13 @@ def print_info(n_list:list[int],e_list:list[tuple]) -> None :
         i = i + 1
 
 # (!) uses neighbors
-def degree(n_list:list[int],e_list:list[tuple],x:int) -> int :
-    return len(neighbors(n_list,e_list,x))
+def degree(e_list:list[tuple],x:int) -> int :
+    return len(neighbors(e_list,x))
 
 # (!) uses neighbors
-def intersect_neighbors(n_list:list[int],e_list:list[tuple],a:int,b:int) -> list[int] :
-    a_n : list[int] = neighbors(n_list,e_list,a)
-    b_n : list[int] = neighbors(n_list,e_list,b)
+def intersect_neighbors(e_list:list[tuple],a:int,b:int) -> list[int] :
+    a_n : list[int] = neighbors(e_list,a)
+    b_n : list[int] = neighbors(e_list,b)
 
     if len(a_n) > len(b_n) :
         return [x for x in a_n if x in b_n]
@@ -144,7 +144,7 @@ def exclu_edges(e1:list[tuple],e2:list[tuple]) -> list[tuple] :
 def DFS(n_list:list[int],e_list:list[tuple],queue:list[int],visited:list[int]) -> list[int] :
     adjacent : list[int] = []
     for q in queue : 
-        adjacent = adjacent + (neighbors(n_list,e_list,q))
+        adjacent = adjacent + (neighbors(e_list,q))
     
     #print("queue:",queue)
     #print("visited:",visited)
