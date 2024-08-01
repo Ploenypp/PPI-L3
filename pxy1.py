@@ -27,7 +27,7 @@ def p1(e_list:list[tuple],a:int,b:int) -> int :
     return score
 
 #test
-n1_list = [0,1,2,3,4]
+"""n1_list = [0,1,2,3,4]
 e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
 print(NN(e1_list,1))
 print(NN(e1_list,3))
@@ -35,4 +35,4 @@ print(NN(e1_list,3))
 print(p1(e1_list,1,3))
 
 score_tab = cn_ra_aa.scores_all(n1_list,e1_list,p1)
-cn_ra_aa.print_scores(score_tab)
+cn_ra_aa.print_scores(score_tab)"""
