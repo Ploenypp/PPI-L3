@@ -26,6 +26,32 @@ def p1(e_list:list[tuple],a:int,b:int) -> int :
     
     return score
 
+def best_cand_p1(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
+    res : list[tuple] = []
+    max_val : float = 0.0
+    all_scores : list[list[float]] = cn_ra_aa.scores_all(n_list,e_list,method)
+
+    # calculate max_val
+    for i in range(len(all_scores)) :
+        for j in range(len(all_scores)) :
+            if all_scores[i][j] > max_val and g_func.check_edge(e_list,tuple((i,j))) :
+                max_val = all_scores[i][j]
+    
+    # select those with max_val
+    for i in range(len(all_scores)) :
+        for j in range(len(all_scores)) :
+            if g_func.check_edge(res,(i,max)) and all_scores[i][j] == max_val :
+                res.append(tuple((i,j)))
+    return g_func.check_edge_list(res)
+
+def apply_method(n_list:list[int],e_list:list[tuple],method) -> None :
+    new : list[tuple] = best_cand_p1(n_list,e_list,method)
+    print("\t - proposed edges : ", new)
+    new = g_func.exclu_edges(e_list,new)
+    print("\t - new edges : ", new)
+
+    return e_list + new
+
 #test
 """n1_list = [0,1,2,3,4]
 e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
