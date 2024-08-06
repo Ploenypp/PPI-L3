@@ -1,4 +1,5 @@
 import g_func
+import math
 import cn_ra_aa
 
 def NN(e_list:list[tuple],x:int) -> list[int] :
@@ -65,6 +66,16 @@ def apply_method(n_list:list[int],e_list:list[tuple],method) -> None :
 
     return e_list + new
 
+def pL3n(e_list:list[tuple],a:int,b:int) -> float :
+    U = set(g_func.neighbors(e_list,a)).intersection(set(NN(e_list,b)))
+    V = set(g_func.neighbors(e_list,b)).intersection(set(NN(e_list,a)))
+    score : float = 0.0
+
+    for u in U :
+        for v in V :
+            if u in g_func.neighbors(e_list,v) :
+                score += 1/(math.sqrt(len(g_func.neighbors(u))*len(g_func.neighbors(v))))
+    return score
 #test
 """n1_list = [0,1,2,3,4]
 e1_list = [(0, 3), (1, 2), (2, 0), (3, 4), (4, 3), (1, 0), (2, 3)]
