@@ -1,7 +1,7 @@
 import g_func
-import cn
-import ra
-import aa
+import drafting_archive.cn as cn
+import drafting_archive.ra as ra
+import drafting_archive.aa as aa
 import drafting.compare_cn_ra_aa as compare_cn_ra_aa
 
 """ first made as an attempt to test if CN/RA/AA can predict removed edges 
