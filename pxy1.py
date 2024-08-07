@@ -32,7 +32,7 @@ def scores_indiv_non_adj(n_list:list[int],e_list:list[tuple],x:int,method) -> li
 
     for n in n_list :
             if g_func.check_edge(e_list,tuple((x,n))) :
-                res.append(p1(e_list,x,n))
+                res.append(method(e_list,x,n))
             else :
                 res.append(0)
     
@@ -74,7 +74,7 @@ def pL3N(e_list:list[tuple],a:int,b:int) -> float :
     for u in U :
         for v in V :
             if u in g_func.neighbors(e_list,v) :
-                score += (float)(1/(math.sqrt(len(g_func.neighbors(u))*len(g_func.neighbors(v)))))
+                score += (float)(1/(math.sqrt(g_func.degree(e_list,u)*g_func.degree(e_list,v))))
     return score
 
 #test
