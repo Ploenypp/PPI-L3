@@ -22,8 +22,10 @@ def N(edges:set[tuple],x:int) -> set[int] :
 def NN(edges:set[tuple],x:int) -> set[int] :
     first = N(edges,x)
     res = set()
-    for n in first :
-        res.union(N(edges,n))
+    for f in first :
+        aux = N(edges,f)
+        for n in aux :
+            res.add(n)
     return res
 
 def degree(edges:set[tuple],x:int) -> int :
