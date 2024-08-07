@@ -17,19 +17,6 @@ def nodes(n:int) -> list[int] :
 
 # edges
 
-def eq_edge(e1:tuple,e2:tuple) -> bool :
-    a1 : int = e1[0]
-    a2 : int = e1[1]
-    b1 : int = e2[0]
-    b2 : int = e2[0]
-
-    if e1 == e2 :
-        return True
-    elif a1 == b2 and a2 == b1 :
-        return True
-    else :
-        return False
-
 def check_edge(e_list:list[tuple],e:tuple) -> bool :
     # true : add, false : retry/refuse
     a : int = e[0]
