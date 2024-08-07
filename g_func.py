@@ -93,6 +93,19 @@ def neighbors(e_list:list[tuple],x:list) -> list[int] :
             res.append(i)
     return res
 
+def NN(e_list:list[tuple],x:int) -> list[int] :
+    first = g_func.neighbors(e_list,x)
+    second : list[int] = []
+
+    for n in first :
+        second += g_func.neighbors(e_list,n)
+    
+    res : list[int] = []
+    for n in second :
+        if n not in res :
+            res.append(n)
+    return res
+
 # NOTICE : only considers 1st node in pair, check if considering 2nd affects other code
 def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
     res : list[list[int]] = []
