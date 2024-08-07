@@ -81,11 +81,11 @@ def neighbors(e_list:list[tuple],x:list) -> list[int] :
     return res
 
 def NN(e_list:list[tuple],x:int) -> list[int] :
-    first = g_func.neighbors(e_list,x)
+    first = neighbors(e_list,x)
     second : list[int] = []
 
     for n in first :
-        second += g_func.neighbors(e_list,n)
+        second += neighbors(e_list,n)
     
     res : list[int] = []
     for n in second :
