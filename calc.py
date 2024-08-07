@@ -1,13 +1,52 @@
 import g_func
 
-def scores_indiv(n_list:list[int],e_list:list[tuple],x:int,method) -> list[float] :
-    return [method(e_list,x,n) for n in n_list]
+def scores_indiv(nodes:list[int],edges:set[tuple],x:int,non_adj_crit:bool,method) -> list[float] :
+    res = []
+    if non_adj_crit :
+        for n in nodes :
+            if n!= x :
+                res.append(method(edges,x,n))
+            else :
+                res.append(0)
+        return res
+    return [method(edges,x,n) for n in nodes]
 
-def scores_all(n_list:list[int],e_list:list[tuple],method) -> list[list[float]] :
-    return [scores_indiv(n_list,e_list,n,method) for n in n_list]
+def all_scores(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> list[list[float]] :
+    return [scores_indiv(nodes,edges,n,non_adj_crit,method) for n in nodes]
+
+def cand(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> set[tuple] :
+    aux = set()
+    max_val = 0.0
+    scores = all_scores(nodes,edges,non_adj_crit,method)
+
+    for i in range(len(scores)) :
+        if max(scores[i]) > max_val :
+            max_val = max(scores[i])
+
+    for i in range(len(scores)) :
+        for j in range(len(scores)) :
+            if i!=j and scores[i][j] == max_val :
+                aux.add(tuple((i,j)))
+    
+    res = set()
+    for (a,b) in aux :
+        if (a,b) not in res and (b,a) not in res :
+            res.add(tuple((a,b)))
+    return res
+
+def apply(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> None :
+    first = cand(nodes,edges,non_adj_crit,method)
+    print("\t - proposed edges : ", first)
+    
+    new = set()
+    for (a,b) in first :
+        if (a,b) not in edges and (b,a) not in edges :
+            new.add(tuple((a,b)))
+    print("\t - new edges : ", new)
+    
+    return new.union(edges)
 
 def print_scores(tab:list[list[float]]) -> None :
-
     print("     ",end="")
     for i in range(len(tab)) :
         print(i,"   ",end="")
@@ -25,69 +64,3 @@ def print_scores(tab:list[list[float]]) -> None :
             else :
                 print("%.2f|"% tab[i][j],end="")
         print("\n")
-
-def best_candidates(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
-    res : list[tuple] = []
-    max_val : float = 0.0
-    all_scores : list[list[float]] = scores_all(n_list,e_list,method)
-
-    # calculate max_val
-    for i in range(len(all_scores)) :
-        if max(all_scores[i]) > max_val :
-            max_val = max(all_scores[i])
-    
-    # select those with max_val
-    for i in range(len(all_scores)) :
-        for j in range(len(all_scores)) :
-            if g_func.check_edge(res,(i,max)) and all_scores[i][j] == max_val :
-                res.append(tuple((i,j)))
-    return g_func.check_edge_list(res)
-
-def apply_method(n_list:list[int],e_list:list[tuple],method) -> None :
-    new : list[tuple] = best_candidates(n_list,e_list,method)
-    print("\t - proposed edges : ", new)
-    new = g_func.exclu_edges(e_list,new)
-    print("\t - new edges : ", new)
-
-    return e_list + new
-
-# including non_adj criteria
-
-def scores_indiv_non_adj(n_list:list[int],e_list:list[tuple],x:int,method) -> list[float] :
-    res : list[float] = []
-
-    for n in n_list :
-            if g_func.check_edge(e_list,tuple((x,n))) :
-                res.append(method(e_list,x,n))
-            else :
-                res.append(0)
-    
-    return res
-
-def scores_non_adj(n_list:list[int],e_list:list[tuple],method) -> list[list[float]] :
-    return [scores_indiv_non_adj(n_list,e_list,n,method) for n in n_list]
-
-def best_cand_p1(n_list:list[int],e_list:list[tuple],method) -> list[tuple] :
-    res : list[tuple] = []
-    max_val : float = 0.0
-    all_scores : list[list[float]] = scores_non_adj(n_list,e_list,method)
-
-    # calculate max_val
-    for i in range(len(all_scores)) :
-        if max(all_scores[i]) > max_val :
-            max_val = max(all_scores[i])
-    
-    # select those with max_val
-    for i in range(len(all_scores)) :
-        for j in range(len(all_scores)) :
-            if g_func.check_edge(res,(i,max)) and all_scores[i][j] == max_val :
-                res.append(tuple((i,j)))
-    return g_func.check_edge_list(res)
-
-def apply_method(n_list:list[int],e_list:list[tuple],method) -> None :
-    new : list[tuple] = best_cand_p1(n_list,e_list,method)
-    print("\t - proposed edges : ", new)
-    new = g_func.exclu_edges(e_list,new)
-    print("\t - new edges : ", new)
-
-    return e_list + new
