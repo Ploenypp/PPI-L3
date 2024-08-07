@@ -4,7 +4,7 @@ def scores_indiv(nodes:list[int],edges:set[tuple],x:int,non_adj_crit:bool,method
     res = []
     if non_adj_crit :
         for n in nodes :
-            if n!= x :
+            if n!= x and n not in g_func.N(edges,x) :
                 res.append(method(edges,x,n))
             else :
                 res.append(0)
