@@ -93,28 +93,6 @@ def NN(e_list:list[tuple],x:int) -> list[int] :
             res.append(n)
     return res
 
-# NOTICE : only considers 1st node in pair, check if considering 2nd affects other code
-def edge_list_adj(n_list:list[int],e_list:list[tuple]) -> list[list[int]] :
-    res : list[list[int]] = []
-    for n in n_list :
-        aux : list[int] = neighbors(e_list,n)
-        res.append(aux)
-    return res
-
-# NOTICE : display of edges isn't a true adjacency list (no duplicates)
-# (!) uses edge_list_adj
-def print_info(n_list:list[int],e_list:list[tuple]) -> None :
-    print("nodes : ", n_list)
-    e_aux : list[list[int]] = edge_list_adj(n_list,e_list)
-    print("edges\n")
-    i : int = 0
-    for e in e_aux :
-        print(i,"| ",end="")
-        for n in e :
-            print(n," ",end="")
-        print("\n")
-        i = i + 1
-
 # (!) uses neighbors
 def degree(e_list:list[tuple],x:int) -> int :
     return len(neighbors(e_list,x))
