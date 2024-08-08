@@ -3,10 +3,8 @@ import matplotlib.pyplot as plt
 
 def graph(nodes:list[int],edges:set[tuple]) -> None :
     G = nx.Graph()
-    for n in nodes :
-        G.add_node(n)
-    for (a,b) in edges :
-        G.add_edge(a,b,color = 'b',weight = 4)
+    G.add_nodes_from(nodes)
+    G.add_edges_from(edges)
     nx.draw(G, with_labels = True, font_weight = 'bold')
     plt.show()
 
