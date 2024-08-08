@@ -21,6 +21,9 @@ git push
 
     > if only concerned with non adjacent nodes, would only considering the possible edges that don't exist be more efficient? 
 
+--> only considering edges that don't exist ensures that there will always be candidate edges 
+    for the 3 graphs, when using p1 and pL3N, no candidates remained if criteria is not in effect
+
 method for choosing best edge candidates
 - choose overall highest CN score (bco) instead of best edge for each node (bcn)
     - in theory, bcn favors the creation of edges from the node of the lowest value (condition not explicity written/implemented)
