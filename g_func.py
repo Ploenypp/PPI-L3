@@ -28,3 +28,41 @@ def NN(edges:set[tuple],x:int) -> set[int] :
 
 def degree(edges:set[tuple],x:int) -> int :
     return len(N(edges,x))
+
+def extract(line:str) -> tuple :
+    aux = ""
+    a = ""
+    b = ""
+    i = 0
+    
+    while line[i] != "," :
+        aux += line[i]
+        i += 1
+    a = aux
+    aux = ""
+    i += 1
+    while i < len(line) :
+        aux += line[i]
+        i += 1
+    b = aux
+
+    print(a,",",b)
+    #return tuple((int(a),int(b)))
+    return tuple((int(a),int(b)))
+
+def txt_set(file:str) -> set[tuple] :
+    f = open(file,"r")
+    reader = f.readline()
+    reader = f.readline()
+    res = set()
+
+    while len(reader)!= 0 :
+        res.add(extract(reader))
+        reader = f.readline()
+    
+    f.close()
+    return res
+
+#test 
+edges = txt_set("SyntheticPPI.txt")
+print(edges)

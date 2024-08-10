@@ -29,6 +29,9 @@ method for choosing best edge candidates
     - in theory, bcn favors the creation of edges from the node of the lowest value (condition not explicity written/implemented)
     - result : creation high-degree nodes that could impact future predictions based on previous prediction
 
+SYNTHETIC DATABASE :
+https://github.com/spxuw/PPI-Prediction-Project/tree/master/Interactomes
+
 EVALUATION (DON'T DO UNTIL THAT EACH METHOD'S CODE WORKS)
 
 >>> ???
