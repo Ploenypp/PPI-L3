@@ -1,23 +1,27 @@
 import g_func
 
-def scores_indiv(nodes:list[int],edges:set[tuple],x:int,non_adj_crit:bool,method) -> list[float] :
+def scores_indiv(nodes:list[int],edges:set[tuple],x:int,sip:bool,non_adj_crit:bool,method) -> list[float] :
     res = []
-    if non_adj_crit :
-        for n in nodes :
-            if n!= x and n not in g_func.N(edges,x) :
-                res.append(method(edges,x,n))
+    for n in nodes :
+        if sip == False and n == x :
+            res.append(0)
+        else :
+            if non_adj_crit :
+                if n not in g_func.N(edges,x) :
+                    res.append(method(edges,x,n))
+                else :
+                    res.append(0)
             else :
-                res.append(0)
-        return res
-    return [method(edges,x,n) for n in nodes]
+                res.append(method(edges,x,n))
+    return res
 
-def all_scores(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> list[list[float]] :
-    return [scores_indiv(nodes,edges,n,non_adj_crit,method) for n in nodes]
+def all_scores(nodes:list[int],edges:set[tuple],sip:bool,non_adj_crit:bool,method) -> list[list[float]] :
+    return [scores_indiv(nodes,edges,n,sip,non_adj_crit,method) for n in nodes]
 
-def cand(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> set[tuple] :
+def cand(nodes:list[int],edges:set[tuple],sip:bool,non_adj_crit:bool,method) -> set[tuple] :
     aux = set()
     max_val = 0.0
-    scores = all_scores(nodes,edges,non_adj_crit,method)
+    scores = all_scores(nodes,edges,sip,non_adj_crit,method)
 
     for i in range(len(scores)) :
         if max(scores[i]) > max_val :
@@ -34,8 +38,8 @@ def cand(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> set[tuple
             res.add(tuple((a,b)))
     return res
 
-def apply(nodes:list[int],edges:set[tuple],non_adj_crit:bool,method) -> None :
-    first = cand(nodes,edges,non_adj_crit,method)
+def apply(nodes:list[int],edges:set[tuple],sip:bool,non_adj_crit:bool,method) -> None :
+    first = cand(nodes,edges,sip,non_adj_crit,method)
     print("\t - proposed edges : ", first)
     
     new = set()
