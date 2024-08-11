@@ -11,7 +11,7 @@ def graph(nodes:list[int],edges:set[tuple]) -> None :
 def get_nodes(edges:set[tuple]) -> list[int] :
     G = nx.Graph()
     G.add_edges_from(edges)
-    return G.nodes
+    return sorted(G.nodes)
 
 def N(edges:set[tuple],x:int) -> set[int] :
     res = set()
