@@ -64,7 +64,7 @@ def txt_set(file:str) -> set[tuple] :
         reader = f.readline()
     
     f.close()
-    return res
+    return sorted(res)
 
 #test 
 #edges = txt_set("SyntheticPPI.txt")
