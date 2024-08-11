@@ -8,6 +8,11 @@ def graph(nodes:list[int],edges:set[tuple]) -> None :
     nx.draw(G, with_labels = True, font_weight = 'bold')
     plt.show()
 
+def get_nodes(edges:set[tuple]) -> list[int] :
+    G = nx.Graph()
+    G.add_edges_from(edges)
+    return G.nodes
+
 def N(edges:set[tuple],x:int) -> set[int] :
     res = set()
     for (a,b) in edges :
@@ -46,8 +51,6 @@ def extract(line:str) -> tuple :
         i += 1
     b = aux
 
-    print(a,",",b)
-    #return tuple((int(a),int(b)))
     return tuple((int(a),int(b)))
 
 def txt_set(file:str) -> set[tuple] :
@@ -64,5 +67,9 @@ def txt_set(file:str) -> set[tuple] :
     return res
 
 #test 
-edges = txt_set("SyntheticPPI.txt")
-print(edges)
+#edges = txt_set("SyntheticPPI.txt")
+#print(edges)
+
+e = {(0,3),(1,2),(2,0),(3,4),(4,3),(1,0),(2,3)}
+nodes = get_nodes(e)
+print(sorted(nodes))
