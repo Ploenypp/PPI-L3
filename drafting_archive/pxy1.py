@@ -1,6 +1,6 @@
 import g_func
 import math
-import method
+import formula
 
 def NN(e_list:list[tuple],x:int) -> list[int] :
     first = g_func.neighbors(e_list,x)
