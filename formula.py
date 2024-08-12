@@ -54,10 +54,6 @@ def SR(a:set,b:set) -> float :
 def JC(a:set,b:set) -> float :
     return (float)(len(a.intersection(b))/len(a.union(b)))
 
-# DOUBLE CHECK SIM (CONTEXT?)
-def Sim(edges:set[tuple],x:int,y:int,u:int,v:int) -> float :
-    return JC(g_func.N(x),g_func.N(v)) + JC(g_func.N(y),g_func.N(u))
-
 def pL3N(edges:set[tuple],x:int,y:int,sm) -> float :
     U = g_func.N(x).intersection(g_func.NN(y))
     V = g_func.N(y).intersection(g_func.NN(x))
