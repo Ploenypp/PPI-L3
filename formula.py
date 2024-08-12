@@ -37,7 +37,7 @@ def p1(edges:set[tuple],a:int,b:int) -> int :
                 score += 1
     return score
 
-def pL3N(edges:set[tuple],a:int,b:int) -> float :
+def pL3(edges:set[tuple],a:int,b:int) -> float :
     U = g_func.N(edges,a).intersection(g_func.NN(edges,b))
     V = g_func.N(edges,b).intersection(g_func.NN(edges,a))
     score = 0.0
