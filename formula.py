@@ -47,3 +47,13 @@ def pL3N(edges:set[tuple],a:int,b:int) -> float :
             if u in g_func.N(edges,v) :
                 score += (float)(1/(math.sqrt(g_func.degree(edges,u)*g_func.degree(edges,v))))
     return score
+
+def SR(a:set,b:set) -> float :
+    return (float)(len(a.intersection(b))/len(a))
+
+def JC(a:set,b:set) -> float :
+    return (float)(len(a.intersection(b))/len(a.union(b)))
+
+# DOUBLE CHECK SIM (CONTEXT?)
+def Sim(edges:set[tuple],x:int,y:int,u:int,v:int) -> float :
+    return JC(g_func.N(x),g_func.N(v)) + JC(g_func.N(y),g_func.N(u))
