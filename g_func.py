@@ -34,6 +34,7 @@ def NN(edges:set[tuple],x:int) -> set[int] :
 def degree(edges:set[tuple],x:int) -> int :
     return len(N(edges,x))
 
+# extract only works for int,int edge pairs
 def extract(line:str) -> tuple :
     aux = ""
     a = ""
@@ -65,11 +66,3 @@ def txt_set(file:str) -> set[tuple] :
     
     f.close()
     return sorted(res)
-
-#test 
-#edges = txt_set("SyntheticPPI.txt")
-#print(edges)
-
-e = {(0,3),(1,2),(2,0),(3,4),(4,3),(1,0),(2,3)}
-nodes = get_nodes(e)
-print(sorted(nodes))
