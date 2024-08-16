@@ -49,9 +49,13 @@ def pL3(edges:set[tuple],a:int,b:int) -> float :
     return score
 
 def SR(a:set,b:set) -> float :
+    if len(a) == 0 :
+        return 0.0
     return (float)(len(a.intersection(b))/len(a))
 
 def JC(a:set,b:set) -> float :
+    if len(a.union(b)) == 0 :
+        return 0.0
     return (float)(len(a.intersection(b))/len(a.union(b)))
 
 def pL3N(edges:set[tuple],x:int,y:int,sm) -> float :
