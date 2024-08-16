@@ -56,7 +56,17 @@ e = convert(ref,yeast)
 n = g_func.get_nodes(e)
 print(len(n))
 
-SR = calc_n.cand(n,e,True,True,formula.pL3Np,formula.SR)
+score_1 = calc_n.scores_indiv(n,e,1,True,True,formula.pL3Np,formula.SR)
+print("min = ", min(score_1))
+print("max = ",max(score_1))
+
+for i in range(len(score_1)) :
+    if score_1[i] == max(score_1) :
+        print(i," ",end="")
+print("\n")"""
+
+
+"""SR = calc_n.cand(n,e,True,True,formula.pL3Np,formula.SR)
 JC = calc_n.cand(n,e,True,True,formula.pL3Np,formula.JC)
 print("len(SR) = ",len(SR))
 print("len(JC) = ",len(JC))"""
