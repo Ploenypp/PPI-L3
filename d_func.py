@@ -97,5 +97,4 @@ for (a,b) in e :
         new_e.add(tuple((a,b)))
 print(len(new_e))
 
-rewrite scores.csv, upload to score_sheets.xls
 candidates = cand(new_e)"""
