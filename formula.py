@@ -69,7 +69,7 @@ def pL3N(edges:set[tuple],x:int,y:int,sm) -> float :
     for u in U :
         yu += sm(g_func.N(edges,y),g_func.N(edges,u)-{x})
         for v in V :
-            vU += sm(g_func.N(edges)-{y},U)
+            vU += sm(g_func.N(edges,v)-{y},U)
             xv += sm(g_func.N(edges,x),g_func.N(edges,v)-{y})
             if u in g_func.N(edges,v) :
                 uV += sm(g_func.N(edges,u)-{x},V)
