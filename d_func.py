@@ -1,6 +1,6 @@
 import g_func
 import formula
-import calc_n
+
 # create edge set
 def extract(line) :
     a = ""
@@ -48,25 +48,54 @@ def convert(ref,edges) :
         res.add(tuple((ref.get(a),ref.get(b))))
     return res
 
-"""yeast = file_set("Yeast.txt")
-print(yeast)
-ref = reference(yeast)
-print(ref)
-e = convert(ref,yeast)
+def record(max_val,edges) :
+    f = open("rec_d_func.txt","a+")
+    aux = "max_val = " + str(max_val) + " | " + str(edges) + "\n"
+    f.write(aux)
+    f.close()
+
+def cand(edges) :
+    nodes = g_func.get_nodes(edges)
+    res = set()
+    max_val = 0.0
+    
+    for i in nodes :
+        for j in nodes:
+            if tuple((i,j)) not in edges and i not in g_func.N(edges,j) :
+                aux = round(formula.pL3Np(edges,i,j,formula.SR),2)
+                if aux >= max_val :
+                    res.clear()
+                    res.add(tuple((i,j)))
+                    if aux > max_val :
+                        print("max_val = ",max_val)
+                    max_val = aux
+                    print("\t",tuple((i,j)))
+    
+    record(max_val,res)
+    return res
+
+
+# test
+"""e_file = file_set("Yeast.txt")
+ref = reference(e_file)
+e = convert(ref,e_file)
 n = g_func.get_nodes(e)
-print(len(n))
+print(n)
 
-score_1 = calc_n.scores_indiv(n,e,1,True,True,formula.pL3Np,formula.SR)
-print("min = ", min(score_1))
-print("max = ",max(score_1))
+num_n = (int)(len(n)/10)
+print(num_n)
+new_n = []
+i = 1
+while i < num_n + 1 :
+    new_n.append(i)
+    i += 1
+print(len(new_n))
 
-for i in range(len(score_1)) :
-    if score_1[i] == max(score_1) :
-        print(i," ",end="")
-print("\n")"""
+new_e = set()
+for (a,b) in e :
+    if a <= num_n and b <= num_n :
+        new_e.add(tuple((a,b)))
+print(len(new_e))
 
-
-"""SR = calc_n.cand(n,e,True,True,formula.pL3Np,formula.SR)
-JC = calc_n.cand(n,e,True,True,formula.pL3Np,formula.JC)
-print("len(SR) = ",len(SR))
-print("len(JC) = ",len(JC))"""
+rewrite scores.csv, upload to score_sheets.xls
+candidates = cand(new_e)"""
