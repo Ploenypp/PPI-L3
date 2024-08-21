@@ -31,6 +31,9 @@ def NN(edges:set[tuple],x:int) -> set[int] :
             res.add(n)
     return res
 
+def NintNN(edges:set[tuple],x:int,y:int) -> set[int] :
+    return N(edges,x).intersection(NN(edges,y))
+
 def degree(edges:set[tuple],x:int) -> int :
     return len(N(edges,x))
 
