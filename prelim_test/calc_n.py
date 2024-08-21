@@ -4,9 +4,9 @@ import g_func
 
 def scores_indiv(nodes:list[int],edges:set[tuple],x:int,sip:bool,non_adj_crit:bool,method,sm) -> list[float] :
     res = [0] * nodes.index(x)
-    print(x," : ",end="")
+    #print(x," : ",end="")
     for n in nodes[nodes.index(x):] :
-        print(n," ",end="")
+        #print(n," ",end="")
         if tuple((x,n)) not in edges and tuple((n,x)) not in edges :
             if sip == False and n == x :
                 res.append(0)
@@ -20,7 +20,7 @@ def scores_indiv(nodes:list[int],edges:set[tuple],x:int,sip:bool,non_adj_crit:bo
                     res.append(method(edges,x,n,sm))
         else :
             res.append(0)
-    print("\n")
+    #print("\n")
     return res
 
 def all_scores(nodes:list[int],edges:set[tuple],sip:bool,non_adj_crit:bool,method,sm) -> list[list[float]] :
