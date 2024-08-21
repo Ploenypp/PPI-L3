@@ -27,8 +27,8 @@ def AA(edges:set[tuple],a:int,b:int) -> float :
     return sum
 
 def p1(edges:set[tuple],a:int,b:int) -> int :
-    U = g_func.N(edges,a).intersection(g_func.NN(edges,b))
-    V = g_func.N(edges,b).intersection(g_func.NN(edges,a))
+    U = g_func.NintNN(edges,a,b)
+    V = g_func.NintNN(edges,b,a)
     score = 0
 
     for u in U :
@@ -38,8 +38,8 @@ def p1(edges:set[tuple],a:int,b:int) -> int :
     return score
 
 def pL3(edges:set[tuple],a:int,b:int) -> float :
-    U = g_func.N(edges,a).intersection(g_func.NN(edges,b))
-    V = g_func.N(edges,b).intersection(g_func.NN(edges,a))
+    U = g_func.NintNN(edges,a,b)
+    V = g_func.NintNN(edges,b,a)
     score = 0.0
 
     for u in U :
@@ -59,8 +59,8 @@ def JC(a:set,b:set) -> float :
     return (float)(len(a.intersection(b))/len(a.union(b)))
 
 def pL3N(edges:set[tuple],x:int,y:int,sm) -> float :
-    U = g_func.N(edges,x).intersection(g_func.NN(edges,y))
-    V = g_func.N(edges,y).intersection(g_func.NN(edges,x))
+    U = g_func.NintNN(edges,x,y)
+    V = g_func.NintNN(edges,y,x)
 
     uV = 0.0 
     vU = 0.0
@@ -77,8 +77,8 @@ def pL3N(edges:set[tuple],x:int,y:int,sm) -> float :
     return sm(g_func.N(edges,x),U) * sm(g_func.N(edges,y),V) * uV * vU * xv * yu
 
 def pL3Np(edges:set[tuple],x:int,y:int,sm) -> float :
-    U = g_func.N(edges,x).intersection(g_func.NN(edges,y))
-    V = g_func.N(edges,y).intersection(g_func.NN(edges,x))
+    U = g_func.NintNN(edges,x,y)
+    V = g_func.NintNN(edges,y,x)
 
     uV = 0.0
     vU = 0.0
