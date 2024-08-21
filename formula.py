@@ -62,35 +62,23 @@ def pL3N(edges:set[tuple],x:int,y:int,sm) -> float :
     U = g_func.NintNN(edges,x,y)
     V = g_func.NintNN(edges,y,x)
 
-    uV = 0.0 
-    vU = 0.0
-    xv = 0.0
-    yu = 0.0
+    sum = 0.0
     for u in U :
-        yu += sm(g_func.N(edges,y),g_func.N(edges,u)-{x})
         for v in V :
-            vU += sm(g_func.N(edges,v)-{y},U)
-            xv += sm(g_func.N(edges,x),g_func.N(edges,v)-{y})
             if u in g_func.N(edges,v) :
-                uV += sm(g_func.N(edges,u)-{x},V)
+                sum += sm(g_func.N(edges,y),g_func.N(edges,u)-{x}) * sm(g_func.N(edges,u)-{x},V) * sm(g_func.N(edges,v)-{y},U) * sm(g_func.N(edges,x),g_func.N(edges,v)-{y})
     
-    return sm(g_func.N(edges,x),U) * sm(g_func.N(edges,y),V) * uV * vU * xv * yu
+    return sm(g_func.N(edges,x),U) * sm(g_func.N(edges,y),V) * sum
 
 def pL3Np(edges:set[tuple],x:int,y:int,sm) -> float :
     U = g_func.NintNN(edges,x,y)
     V = g_func.NintNN(edges,y,x)
 
-    uV = 0.0
-    vU = 0.0
-    xv = 0.0
-    yu = 0.0
+    sum = 0.0
 
     for u in U :
-        yu += sm(g_func.N(edges,y),g_func.N(edges,u))
         for v in V :
-            vU += sm(g_func.N(edges,v),U)
-            xv += sm(g_func.N(edges,x),g_func.N(edges,v))
             if u in g_func.N(edges,v) :
-                uV += sm(g_func.N(edges,u),V)
+                sum += sm(g_func.N(edges,y),g_func.N(edges,u)) * sm(g_func.N(edges,v),U) * sm(g_func.N(edges,x),g_func.N(edges,v)) * sm(g_func.N(edges,u),V)
 
-    return sm(g_func.N(edges,x),U) * sm(g_func.N(edges,y),V) * uV * vU * xv * yu
+    return sm(g_func.N(edges,x),U) * sm(g_func.N(edges,y),V) * sum
