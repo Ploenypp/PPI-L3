@@ -2,6 +2,8 @@ import g_func
 import formula
 
 # create edge set
+
+# obj.split(",") instead of extract function
 def extract(line) :
     a = ""
     b = ""
