@@ -42,7 +42,7 @@ def p1(G,a,b,ex=True) :
         nnB = s_neighborsList(G,nB) - {b}
     else : # including parent nodes (not exclusively neighbors of distance 2)
         nnA = neighborsList(G,nA)
-        nnB = s_neighborsList(G,nB)
+        nnB = neighborsList(G,nB)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -67,7 +67,7 @@ def pL3(G,a,b,ex=True) :
         nnB = s_neighborsList(G,nB) - {b}
     else : # including parent nodes (not exclusively neighbors of distance 2)
         nnA = neighborsList(G,nA)
-        nnB = s_neighborsList(G,nB)
+        nnB = neighborsList(G,nB)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -93,7 +93,7 @@ def pL3N(G,a,b,metric,ex=True) :
         nnB = s_neighborsList(G,nB) - {b}
     else : # including parent nodes (not exclusively neighbors of distance 2)
         nnA = neighborsList(G,nA)
-        nnB = s_neighborsList(G,nB)
+        nnB = neighborsList(G,nB)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -118,7 +118,7 @@ def pL3Np(G,a,b,metric,ex=True) :
         nnB = s_neighborsList(G,nB) - {b}
     else : # including parent nodes (not exclusively neighbors of distance 2)
         nnA = neighborsList(G,nA)
-        nnB = s_neighborsList(G,nB)
+        nnB = neighborsList(G,nB)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
