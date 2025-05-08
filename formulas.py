@@ -4,17 +4,17 @@ from myfunc import *
 # calculate Common Neighbors score for a pair of nodes
 def CN(G,a,b) :
     if a == b : return 0
-    return len(intersectAB(G,a,b))
+    return len(N(G,a).intersection(N(G,b)))
 
 # calculate Resource Allocation score for a pair of nodes
 def RA(G,a,b) :
     if a == b : return 0
-    return fsum([1/G.degree(n) for n in intersectAB(G,a,b) if 1/G.degree(n) > 0])
+    return fsum([1/G.degree(n) for n in N(G,a).intersection(N(G,b)) if 1/G.degree(n) > 0])
 
 # calculate Adamic Adar Index for a pair of nodes
 def AA(G,a,b) :
     if a == b : return 0 
-    return fsum([1/log(G.degree(n)) for n in intersectAB(G,a,b) if 1/log(G.degree(n)) > 0])
+    return fsum([1/log(G.degree(n)) for n in N(G,a).intersection(N(G,b)) if 1/log(G.degree(n)) > 0])
 
 # calculate the Simple Ratio of 2 sets
 def SR(a,b) :
@@ -33,16 +33,8 @@ def JC(a,b) :
 def p1(G,a,b,ex=True) :
     if a == b : return 0
 
-    nA = neighbor(G,a)
-    nB = neighbor(G,b)
-    nnA, nnB = set(), set()
-
-    if ex : # exclusively neighbors of distance 2
-        nnA = s_neighborsList(G,nA) - {a}
-        nnB = s_neighborsList(G,nB) - {b}
-    else : # including parent nodes (not exclusively neighbors of distance 2)
-        nnA = neighborsList(G,nA)
-        nnB = neighborsList(G,nB)
+    nA = N(G,a); nB = N(G,b)
+    nnA = NList(G,nA,ex); nnB = NList(G,nB,ex)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -50,7 +42,7 @@ def p1(G,a,b,ex=True) :
     aux = 0
     for u in U :
         for v in V :
-            if u in neighbor(G,v) : 
+            if u in N(G,v) : 
                 aux += 1
     return aux
 
@@ -58,16 +50,8 @@ def p1(G,a,b,ex=True) :
 def pL3(G,a,b,ex=True) :
     if a == b : return 0
 
-    nA = neighbor(G,a)
-    nB = neighbor(G,b)
-    nnA, nnB = set(), set()
-
-    if ex : # exclusively neighbors of distance 2
-        nnA = s_neighborsList(G,nA) - {a}
-        nnB = s_neighborsList(G,nB) - {b}
-    else : # including parent nodes (not exclusively neighbors of distance 2)
-        nnA = neighborsList(G,nA)
-        nnB = neighborsList(G,nB)
+    nA = N(G,a); nB = N(G,b)
+    nnA = NList(G,nA,ex); nnB =  NList(G,nB,ex)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -84,16 +68,8 @@ def pL3(G,a,b,ex=True) :
 def pL3N(G,a,b,metric,ex=True) :
     if a == b : return 0
 
-    nA = neighbor(G,a)
-    nB = neighbor(G,b)
-    nnA, nnB = set(), set()
-
-    if ex : # exclusively neighbors of distance 2
-        nnA = s_neighborsList(G,nA) - {a}
-        nnB = s_neighborsList(G,nB) - {b}
-    else : # including parent nodes (not exclusively neighbors of distance 2)
-        nnA = neighborsList(G,nA)
-        nnB = neighborsList(G,nB)
+    nA = N(G,a); nB = N(G,b)
+    nnA = NList(G,nA,ex); nnB =  NList(G,nB,ex)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -101,7 +77,7 @@ def pL3N(G,a,b,metric,ex=True) :
     aux = 0.0
     for u in U :
         for v in V :
-            aux += metric(neighbor(G,u)-{a},V) * metric(neighbor(G,v)-{b},U) * metric(neighbor(G,a),neighbor(G,v)-{b}) * metric(neighbor(G,b),neighbor(G,u)-{a})
+            aux += metric(N(G,u)-{a},V) * metric(N(G,v)-{b},U) * metric(N(G,a),N(G,v)-{b}) * metric(N(G,b),N(G,u)-{a})
 
     return metric(nA,U) * metric(nB,V) * aux
 
@@ -109,16 +85,8 @@ def pL3N(G,a,b,metric,ex=True) :
 def pL3Np(G,a,b,metric,ex=True) :
     if a == b : return 0
 
-    nA = neighbor(G,a)
-    nB = neighbor(G,b)
-    nnA, nnB = set(), set()
-
-    if ex : # exclusively neighbors of distance 2
-        nnA = s_neighborsList(G,nA) - {a}
-        nnB = s_neighborsList(G,nB) - {b}
-    else : # including parent nodes (not exclusively neighbors of distance 2)
-        nnA = neighborsList(G,nA)
-        nnB = neighborsList(G,nB)
+    nA = N(G,a); nB = N(G,b)
+    nnA = NList(G,nA,ex); nnB =  NList(G,nB,ex)
 
     U = nA.intersection(nnB)
     V = nB.intersection(nnA)
@@ -126,7 +94,7 @@ def pL3Np(G,a,b,metric,ex=True) :
     aux = 0.0
     for u in U :
         for v in V :
-            aux += metric(neighbor(G,u),V) * metric(neighbor(G,v),U) * metric(neighbor(G,a),neighbor(G,v)) * metric(neighbor(G,b),neighbor(G,u))
+            aux += metric(N(G,u),V) * metric(N(G,v),U) * metric(N(G,a),N(G,v)) * metric(N(G,b),N(G,u))
     return aux
 
 

@@ -15,7 +15,7 @@ def scores(G,method,metric,ex=True) :
             else : res[(nodes[i],nodes[j])] = method(G,nodes[i],nodes[j],metric,ex)
             j += 1
 
-    return dict(Counter(res).most_common())
+    return res #dict(Counter(res).most_common())
 
 # create dataframe 
 def convert_df(scores) :

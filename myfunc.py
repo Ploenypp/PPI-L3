@@ -14,16 +14,10 @@ def visualizeGraph(G) :
     plt.show()
 
 # return set of neighbors of given node :
-def neighbor(G,n) :
-    return set(G.neighbors(n))
+def N(G,node) :
+    return set(G.neighbors(node))
 
-# intersection of a's and b's neighbors
-def intersectAB(G,a,b) :
-    return neighbor(G,a).intersection(neighbor(G,b))
-
-# neighbors of nodes in given list
-def neighborsList(G,lst) : # in parent nodes
-    return {n2 for n1 in lst for n2 in neighbor(G,n1)}
-
-def s_neighborsList(G,lst) : # excluding parent nodes
-    return {n2 for n1 in lst for n2 in neighbor(G,n1) if n2 not in lst}
+def NList(G,lst,ex_parents = True) :
+    if ex_parents :
+        return {n2 for n1 in lst for n2 in N(G,n1) if n2 not in lst}
+    return {n2 for n1 in lst for n2 in N(G,n1)} 
